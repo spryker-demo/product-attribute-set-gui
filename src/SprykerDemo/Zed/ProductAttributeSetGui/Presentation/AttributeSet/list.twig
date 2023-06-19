@@ -1,0 +1,23 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block section_title 'Product Attribute Sets' | trans %}
+
+{% block action %}
+    {{ createActionButton('/product-attribute-set-gui/attribute-set/create', 'Create Product Attribute Set' | trans) }}
+{% endblock %}
+
+{% block content %}
+
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Product Attribute Sets' | trans } %}
+
+        {% block widget_content %}
+            {{ productAttributeSetTable | raw }}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
+
+{% block sidedrawer %}
+    {% include '@Discount/_partials/sidedrawer.twig' %}
+{% endblock %}

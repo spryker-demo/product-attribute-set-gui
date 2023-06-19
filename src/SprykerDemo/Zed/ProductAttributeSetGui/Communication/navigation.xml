@@ -1,0 +1,7 @@
+<attributesets>
+    <label>Attribute Sets</label>
+    <title>Attribute Sets</title>
+    <bundle>product-attribute-set-gui</bundle>
+    <controller>attribute-set</controller>
+    <action>list</action>
+</attributesets>

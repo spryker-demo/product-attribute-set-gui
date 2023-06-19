@@ -1,0 +1,44 @@
+{
+    "name": "spryker-demo/product-attribute-set-gui",
+    "type": "library",
+    "description": "ProductAttributeSetGui module",
+    "license": "proprietary",
+    "require": {
+        "php": ">=7.4",
+        "spryker-demo/product-attribute-set": "*",
+        "spryker/gui": "*",
+        "spryker/kernel": "^3.30.0",
+        "spryker/locale": "^3.8.1",
+        "spryker/product-attribute": "^1.10.0",
+        "spryker/symfony": "^3.11.1",
+        "spryker/translator": "^1.9.1",
+        "spryker/util-text": "^1.5.1"
+    },
+    "require-dev": {
+        "spryker/code-sniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SprykerDemo\\": "src/SprykerDemo/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SprykerDemoTest\\": "tests/SprykerDemoTest/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

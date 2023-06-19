@@ -1,0 +1,38 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block section_title 'Product Attribute Set Overview' | trans %}
+
+{% block action %}
+    {{ backActionButton('/product-attribute-set-gui/attribute-set/list', 'List of Product Attribute Sets') }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Attribute Set #' ~ productAttributeSet.idProductAttributeSet } %}
+
+        {% block widget_content %}
+
+            <div class="row">
+                <table class="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <th class="col-lg-2">
+                                {{ 'Name' | trans }}</th>
+                            <td>{{ productAttributeSet.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Attributes' | trans }}</th>
+                            <td>{{ productManagementAttributesNames | join(', ') }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+{% endblock %}

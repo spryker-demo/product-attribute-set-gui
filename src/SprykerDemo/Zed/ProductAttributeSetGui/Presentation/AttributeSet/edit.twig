@@ -1,0 +1,22 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% block section_title 'Edit Product Attribute Set' | trans %}
+
+{% block action %}
+    {{ backActionButton('/product-attribute-set-gui/attribute-set/list', 'List of Product Attribute Sets') }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Edit Product Attribute Set' } %}
+        {% block widget_content %}
+            {{ form_start(form) }}
+                {% include '@ProductAttributeSetGui/AttributeSet/partials/product-attribute-set-form-content.twig' %}
+                <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
+            {{ form_end(form) }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+{% endblock %}
