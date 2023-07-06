@@ -15,7 +15,9 @@ use Spryker\Zed\Translator\Business\TranslatorFacadeInterface;
 use SprykerDemo\Zed\ProductAttributeSet\Business\ProductAttributeSetFacadeInterface;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\Constraint\UniqueNameConstraint;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider\ProductAttributeSetFormDataProvider;
+use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider\ProductAttributeSubFormDataProvider;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\ProductAttributeSetForm;
+use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\ProductAttributeSubForm;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Table\ProductAttributeSetTable;
 use SprykerDemo\Zed\ProductAttributeSetGui\ProductAttributeSetGuiDependencyProvider;
 use Symfony\Component\Form\FormInterface;
@@ -62,6 +64,27 @@ class ProductAttributeSetGuiCommunicationFactory extends AbstractCommunicationFa
     public function getProductAttributeSetForm(array $data = [], array $options = []): FormInterface
     {
         return $this->getFormFactory()->create(ProductAttributeSetForm::class, $data, $options);
+    }
+
+    /**
+     * @return \SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider\ProductAttributeSubFormDataProvider
+     */
+    public function createProductAttributeSubFormDataProvider(): ProductAttributeSubFormDataProvider
+    {
+        return new ProductAttributeSubFormDataProvider(
+            $this->getProductAttributeSetFacade(),
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $options
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function getProductAttributeSubForm(array $data = [], array $options = []): FormInterface
+    {
+        return $this->getFormFactory()->create(ProductAttributeSubForm::class, $data, $options);
     }
 
     /**

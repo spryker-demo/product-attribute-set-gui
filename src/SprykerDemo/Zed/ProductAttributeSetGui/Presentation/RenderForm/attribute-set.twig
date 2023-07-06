@@ -1,0 +1,17 @@
+{% embed '@Gui/Partials/widget.twig' with { widget_title: 'Add Attribute set' } %}
+    {% block widget_content %}
+        {{ form_start(form, { 'attr': {'class': 'kv_autocomplete_form form-group--full-width-controls', 'id': 'attribute_set_form'} }) }}
+        <table width="100%" class="table-vat">
+            <tr>
+                <td width="100%">
+                    {{ form_errors(form) }}
+                    {{ form_widget(form) }}
+                </td>
+                <td>&nbsp;</td>
+                <td style="padding-top: 22px"><input type="button" onclick="return false" class="btn btn-primary" value="{{ 'Add' | trans }}"  id="add-attribute-set" /></td>
+            </tr>
+        </table>
+        <input id="empty-attribute-key-message" type="hidden" value="{{ 'Please select attribute key first' | trans }}"/>
+        {{ form_end(form) }}
+    {% endblock %}
+{% endembed %}
