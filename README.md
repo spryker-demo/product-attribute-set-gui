@@ -1,8 +1,8 @@
-# ProductAttributeSetGui Module
+# Product Attribute Set Gui Module
 [![Latest Stable Version](https://poser.pugx.org/spryker-demo/product-attribute-set-gui/v/stable.svg)](https://packagist.org/packages/spryker-demo/product-attribute-set-gui)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 
-{{ADD DESCRIPTION HERE}}
+Zed Gui for Product Attribute Set module.
 
 ## Installation
 
