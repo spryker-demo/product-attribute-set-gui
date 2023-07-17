@@ -40,7 +40,7 @@ class ProductAttributeSetGuiCommunicationFactory extends AbstractCommunicationFa
      */
     public function getProductAttributeSetQuery(): SpyProductAttributeSetQuery
     {
-        return SpyProductAttributeSetQuery::create();
+        return $this->getProvidedDependency(ProductAttributeSetGuiDependencyProvider::PROPEL_QUERY_PRODUCT_ATTRIBUTE_SET);
     }
 
     /**

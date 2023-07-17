@@ -7,6 +7,7 @@
 
 namespace SprykerDemo\Zed\ProductAttributeSetGui;
 
+use Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSetQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -30,6 +31,11 @@ class ProductAttributeSetGuiDependencyProvider extends AbstractBundleDependencyP
     /**
      * @var string
      */
+    public const PROPEL_QUERY_PRODUCT_ATTRIBUTE_SET = 'PROPEL_QUERY_PRODUCT_ATTRIBUTE_SET';
+
+    /**
+     * @var string
+     */
     public const FACADE_TRANSLATOR = 'FACADE_TRANSLATOR';
 
     /**
@@ -43,6 +49,7 @@ class ProductAttributeSetGuiDependencyProvider extends AbstractBundleDependencyP
         $container = $this->addProductAttributeFacade($container);
         $container = $this->addLocaleFacade($container);
         $container = $this->addTranslatorFacade($container);
+        $container = $this->addProductAttributeSetPropelQuery($container);
 
         return $container;
     }
@@ -98,6 +105,20 @@ class ProductAttributeSetGuiDependencyProvider extends AbstractBundleDependencyP
     {
         $container->set(static::FACADE_TRANSLATOR, function (Container $container) {
             return $container->getLocator()->translator()->facade();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addProductAttributeSetPropelQuery(Container $container): Container
+    {
+        $container->set(static::PROPEL_QUERY_PRODUCT_ATTRIBUTE_SET, function (Container $container) {
+            return SpyProductAttributeSetQuery::create();
         });
 
         return $container;
