@@ -1,0 +1,30 @@
+.attribute-set-table {
+    width: 100%;
+
+    .btn,
+    .form-group {
+        margin: 0;
+    }
+
+    select {
+        width: 100%;
+        margin: 0;
+    }
+
+    &__cell {
+        padding: 0 1px;
+        vertical-align: bottom;
+
+        &--expand {
+            width: 100%;
+        }
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
