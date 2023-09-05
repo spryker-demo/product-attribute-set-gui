@@ -129,8 +129,8 @@ function AttributeManager() {
 
         dataToAdd.push(
             '<div style="text-align: left;"><a data-key="' +
-            key +
-            '" href="#" class="btn btn-xs btn-outline btn-danger remove-item">Remove</a></div>',
+                key +
+                '" href="#" class="btn btn-xs btn-outline btn-danger remove-item">Remove</a></div>',
         );
 
         return dataToAdd;
@@ -145,7 +145,11 @@ function AttributeManager() {
 
         _attributeManager.resetRemovedKey(attributeMetadata.key);
 
-        var dataToAdd = _attributeManager.generateDataToAdd(attributeMetadata.key, attributeMetadata.id, attributeMetadata);
+        var dataToAdd = _attributeManager.generateDataToAdd(
+            attributeMetadata.key,
+            attributeMetadata.id,
+            attributeMetadata,
+        );
 
         dataTable.DataTable().row.add(dataToAdd).draw(true);
 
@@ -396,7 +400,7 @@ $(document).ready(function () {
         var key = input.val().trim();
 
         if (key === '0') {
-            alert("Please select an attribute set");
+            alert('Please select an attribute set');
         }
 
         $.ajax({
@@ -412,20 +416,18 @@ $(document).ready(function () {
                             is_super: castToBoolean(attribute.is_super),
                             input_type: attribute.input_type,
                         },
-                        dataTable
-                    )
+                        dataTable,
+                    );
                 });
 
-                $('.remove-item')
-                    .on('click', function (event, element) {
-                        var key = $(this).attr('data-key');
-                        attributeManager.addRemovedKey(key);
-                        removeActionHandler.call($(this));
-                        return false;
-                    });
-            }
-        })
-
+                $('.remove-item').on('click', function (event, element) {
+                    var key = $(this).attr('data-key');
+                    attributeManager.addRemovedKey(key);
+                    removeActionHandler.call($(this));
+                    return false;
+                });
+            },
+        });
 
         return false;
     });
