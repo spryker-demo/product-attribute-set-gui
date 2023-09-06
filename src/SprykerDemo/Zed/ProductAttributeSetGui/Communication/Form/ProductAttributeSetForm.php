@@ -108,7 +108,7 @@ class ProductAttributeSetForm extends AbstractType
     {
         $builder->add(static::FIELD_PRODUCT_MANAGEMENT_ATTRIBUTE_IDS, Select2ComboBoxType::class, [
             'label' => 'Attributes',
-            'choices' => array_flip($options[static::OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_CHOICES]),
+            'choices' => $options[static::OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_CHOICES],
             'multiple' => true,
             'constraints' => [
                 new NotBlank(),

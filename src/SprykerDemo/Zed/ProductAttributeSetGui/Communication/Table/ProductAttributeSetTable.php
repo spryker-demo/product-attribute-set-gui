@@ -25,7 +25,7 @@ class ProductAttributeSetTable extends AbstractTable
     /**
      * @var \Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSetQuery
      */
-    protected $productAttributeSetQuery;
+    protected SpyProductAttributeSetQuery $productAttributeSetQuery;
 
     /**
      * @var \Spryker\Zed\Translator\Business\TranslatorFacadeInterface

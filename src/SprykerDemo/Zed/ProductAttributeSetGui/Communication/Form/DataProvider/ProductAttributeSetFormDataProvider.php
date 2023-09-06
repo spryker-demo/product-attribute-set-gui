@@ -105,7 +105,9 @@ class ProductAttributeSetFormDataProvider
         foreach ($productAttributes as $productAttribute) {
             foreach ($productAttribute->getLocalizedKeys() as $localizedKey) {
                 if ($localizedKey->getLocaleName() === $currentLocale->getLocaleName()) {
-                    $choices[$productAttribute->getIdProductManagementAttribute()] = $localizedKey->getKeyTranslation();
+                    $choices[$localizedKey->getKeyTranslation()] = $productAttribute->getIdProductManagementAttribute();
+
+                    break;
                 }
             }
         }

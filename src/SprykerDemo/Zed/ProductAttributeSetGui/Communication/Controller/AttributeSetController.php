@@ -158,28 +158,7 @@ class AttributeSetController extends AbstractController
             );
         }
 
-        $productManagementAttributeTransfers = array_filter(
-            $this->getFactory()
-                ->getProductAttributeFacade()
-                ->getProductAttributeCollection(),
-            static function (ProductManagementAttributeTransfer $productManagementAttributeTransfer) use ($productAttributeSetTransfer) {
-                return in_array($productManagementAttributeTransfer->getIdProductManagementAttribute(), $productAttributeSetTransfer->getProductManagementAttributeIds(), true);
-            },
-        );
-
-        $currentLocale = $this->getFactory()->getLocaleFacade()->getCurrentLocale();
-        $productManagementAttributesNames = array_map(
-            static function (ProductManagementAttributeTransfer $productManagementAttributeTransfer) use ($currentLocale): ?string {
-                foreach ($productManagementAttributeTransfer->getLocalizedKeys() as $localizedKey) {
-                    if ($currentLocale->getLocaleName() === $localizedKey->getLocaleName()) {
-                        return $localizedKey->getKeyTranslation();
-                    }
-                }
-
-                return null;
-            },
-            $productManagementAttributeTransfers,
-        );
+        $productManagementAttributesNames = $this->getProductManagementAttributeNames($productAttributeSetTransfer);
 
         return [
             'productAttributeSet' => $productAttributeSetTransfer,
@@ -211,5 +190,28 @@ class AttributeSetController extends AbstractController
         $productAttributeSetTransfer->setProductManagementAttributeIds($productManagementAttributeIds);
 
         $this->getFactory()->getProductAttributeSetFacade()->saveProductAttributeSet($productAttributeSetTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAttributeSetTransfer $productAttributeSetTransfer
+     *
+     * @return array<string|null>
+     */
+    protected function getProductManagementAttributeNames(ProductAttributeSetTransfer $productAttributeSetTransfer): array
+    {
+        $currentLocale = $this->getFactory()->getLocaleFacade()->getCurrentLocale();
+
+        return array_map(
+            static function (ProductManagementAttributeTransfer $productManagementAttributeTransfer) use ($currentLocale): ?string {
+                foreach ($productManagementAttributeTransfer->getLocalizedKeys() as $localizedKey) {
+                    if ($currentLocale->getLocaleName() === $localizedKey->getLocaleName()) {
+                        return $localizedKey->getKeyTranslation();
+                    }
+                }
+
+                return null;
+            },
+            $productAttributeSetTransfer->getProductManagementAttributes()->getArrayCopy(),
+        );
     }
 }
