@@ -101,7 +101,7 @@ class AttributeSetController extends AbstractController
 
         $form = $this
             ->getFactory()
-            ->getProductAttributeSetForm($dataProvider->getData($idProductAttributeSet), $dataProvider->getOptions($idProductAttributeSet))
+            ->getProductAttributeSetForm($dataProvider->getData($idProductAttributeSet), $dataProvider->getOptions())
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

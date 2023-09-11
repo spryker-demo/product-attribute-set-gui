@@ -55,27 +55,23 @@ class ProductAttributeSetFormDataProvider
         if ($idProductAttributeSet === null) {
             return [];
         }
-        $options = [
+        $data = [
             ProductAttributeSetForm::FIELD_ID_PRODUCT_ATTRIBUTE_SET => $idProductAttributeSet,
         ];
         $productAttributeSetTransfer = $this->getProductAttributeSetTransfer($idProductAttributeSet);
 
-        if ($productAttributeSetTransfer) {
-            $options += [
-                ProductAttributeSetForm::FIELD_NAME => $productAttributeSetTransfer->getName(),
-                ProductAttributeSetForm::FIELD_PRODUCT_MANAGEMENT_ATTRIBUTE_IDS => $productAttributeSetTransfer->getProductManagementAttributeIds(),
-            ];
-        }
+        $data += [
+            ProductAttributeSetForm::FIELD_NAME => $productAttributeSetTransfer->getName(),
+            ProductAttributeSetForm::FIELD_PRODUCT_MANAGEMENT_ATTRIBUTE_IDS => $productAttributeSetTransfer->getProductManagementAttributeIds(),
+        ];
 
-        return $options;
+        return $data;
     }
 
     /**
-     * @param int|null $idProductAttributeSet
-     *
      * @return array<string, mixed>
      */
-    public function getOptions(?int $idProductAttributeSet = null): array
+    public function getOptions(): array
     {
         $options = [];
 
@@ -87,9 +83,9 @@ class ProductAttributeSetFormDataProvider
     /**
      * @param int $idProductAttributeSet
      *
-     * @return \Generated\Shared\Transfer\ProductAttributeSetTransfer|null
+     * @return \Generated\Shared\Transfer\ProductAttributeSetTransfer
      */
-    protected function getProductAttributeSetTransfer(int $idProductAttributeSet): ?ProductAttributeSetTransfer
+    protected function getProductAttributeSetTransfer(int $idProductAttributeSet): ProductAttributeSetTransfer
     {
         return $this->productAttributeSetFacade->findProductAttributeSetById($idProductAttributeSet) ?? new ProductAttributeSetTransfer();
     }

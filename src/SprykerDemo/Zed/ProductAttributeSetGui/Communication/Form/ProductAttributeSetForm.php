@@ -60,10 +60,9 @@ class ProductAttributeSetForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-            $this
-                ->addIdProductAttributeSetField($builder)
-                ->addNameField($builder)
-                ->addProductManagementAttributeIdsField($builder, $options);
+        $this->addIdProductAttributeSetField($builder)
+            ->addNameField($builder)
+            ->addProductManagementAttributeIdsField($builder, $options);
     }
 
     /**

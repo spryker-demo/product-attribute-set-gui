@@ -41,11 +41,8 @@ class UniqueNameConstraintValidator extends ConstraintValidator
         if ($formDataProductAttributeSetTransfer['idProductAttributeSet'] !== null && $productSetAttributeTransfer->getIdProductAttributeSet() === (int)($formDataProductAttributeSetTransfer['idProductAttributeSet'])) {
             return;
         }
-
-        if ($productSetAttributeTransfer->getName() == $formDataProductAttributeSetTransfer['name']) {
-            $this->context->buildViolation($constraint->getMessage())
+        $this->context->buildViolation($constraint->getMessage())
                 ->setParameter('{{ name }}', $value)
                 ->addViolation();
-        }
     }
 }
