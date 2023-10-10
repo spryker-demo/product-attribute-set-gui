@@ -117,7 +117,7 @@ class ProductAttributeSetGuiDependencyProvider extends AbstractBundleDependencyP
      */
     protected function addProductAttributeSetPropelQuery(Container $container): Container
     {
-        $container->set(static::PROPEL_QUERY_PRODUCT_ATTRIBUTE_SET, function (Container $container) {
+        $container->set(static::PROPEL_QUERY_PRODUCT_ATTRIBUTE_SET, $container->factory(function (): SpySalesOrderInvoiceQuery {
             return SpyProductAttributeSetQuery::create();
         });
 
