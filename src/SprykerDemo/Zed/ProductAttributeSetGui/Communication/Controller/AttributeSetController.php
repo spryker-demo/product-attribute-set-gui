@@ -8,7 +8,6 @@
 namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication\Controller;
 
 use Generated\Shared\Transfer\ProductAttributeSetTransfer;
-use Generated\Shared\Transfer\ProductManagementAttributeTransfer;
 use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -158,7 +157,7 @@ class AttributeSetController extends AbstractController
             );
         }
 
-        $productManagementAttributesNames = $this->getProductManagementAttributeNames($productAttributeSetTransfer);
+        $productManagementAttributesNames = $this->getFactory()->getProductAttributeSetFacade()->getProductManagementAttributeNames($productAttributeSetTransfer);
 
         return [
             'productAttributeSet' => $productAttributeSetTransfer,
@@ -174,44 +173,12 @@ class AttributeSetController extends AbstractController
     protected function handleProductAttributeSetForm(FormInterface $form): void
     {
         $formData = $form->getData();
-
-        $name = $formData[ProductAttributeSetTransfer::NAME];
-        $idProductAttributeSet = $formData[ProductAttributeSetTransfer::ID_PRODUCT_ATTRIBUTE_SET];
-        $productManagementAttributeIds = $formData[ProductAttributeSetTransfer::PRODUCT_MANAGEMENT_ATTRIBUTE_IDS];
-
         $productAttributeSetTransfer = new ProductAttributeSetTransfer();
-        if ($idProductAttributeSet) {
-            $productAttributeSetTransfer = $this->getFactory()
-                    ->getProductAttributeSetFacade()
-                    ->findProductAttributeSetById($idProductAttributeSet) ?? new ProductAttributeSetTransfer();
-        }
 
-        $productAttributeSetTransfer->setName($name);
-        $productAttributeSetTransfer->setProductManagementAttributeIds($productManagementAttributeIds);
+        $productAttributeSetTransfer->setIdProductAttributeSet($formData[ProductAttributeSetTransfer::ID_PRODUCT_ATTRIBUTE_SET]);
+        $productAttributeSetTransfer->setName($formData[ProductAttributeSetTransfer::NAME]);
+        $productAttributeSetTransfer->setProductManagementAttributeIds($formData[ProductAttributeSetTransfer::PRODUCT_MANAGEMENT_ATTRIBUTE_IDS]);
 
         $this->getFactory()->getProductAttributeSetFacade()->saveProductAttributeSet($productAttributeSetTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductAttributeSetTransfer $productAttributeSetTransfer
-     *
-     * @return array<string|null>
-     */
-    protected function getProductManagementAttributeNames(ProductAttributeSetTransfer $productAttributeSetTransfer): array
-    {
-        $currentLocale = $this->getFactory()->getLocaleFacade()->getCurrentLocale();
-
-        return array_map(
-            static function (ProductManagementAttributeTransfer $productManagementAttributeTransfer) use ($currentLocale): ?string {
-                foreach ($productManagementAttributeTransfer->getLocalizedKeys() as $localizedKey) {
-                    if ($currentLocale->getLocaleName() === $localizedKey->getLocaleName()) {
-                        return $localizedKey->getKeyTranslation();
-                    }
-                }
-
-                return null;
-            },
-            $productAttributeSetTransfer->getProductManagementAttributes()->getArrayCopy(),
-        );
     }
 }

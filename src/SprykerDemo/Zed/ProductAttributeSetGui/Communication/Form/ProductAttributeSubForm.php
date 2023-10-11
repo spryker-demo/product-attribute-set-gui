@@ -57,8 +57,7 @@ class ProductAttributeSubForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this
-            ->addAttributeSetField($builder, $options[static::ATTRIBUTE_SET_CHOICES]);
+        $this->addAttributeSetField($builder, $options[static::ATTRIBUTE_SET_CHOICES]);
     }
 
     /**

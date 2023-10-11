@@ -15,7 +15,7 @@ class ProductAttributeSubFormDataProvider
     /**
      * @var \SprykerDemo\Zed\ProductAttributeSet\Business\ProductAttributeSetFacadeInterface
      */
-    private ProductAttributeSetFacadeInterface $attributeSetFacade;
+    protected ProductAttributeSetFacadeInterface $attributeSetFacade;
 
     /**
      * @param \SprykerDemo\Zed\ProductAttributeSet\Business\ProductAttributeSetFacadeInterface $attributeSetFacade
@@ -46,7 +46,7 @@ class ProductAttributeSubFormDataProvider
     /**
      * @return array<string, mixed>
      */
-    private function getAttributeSetChoices(): array
+    protected function getAttributeSetChoices(): array
     {
         $attributeSets = $this->attributeSetFacade->getProductAttributeSets();
         $choices = [

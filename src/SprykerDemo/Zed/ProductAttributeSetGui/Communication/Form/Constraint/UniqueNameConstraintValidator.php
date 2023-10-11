@@ -26,10 +26,7 @@ class UniqueNameConstraintValidator extends ConstraintValidator
         if (!$constraint instanceof UniqueNameConstraint) {
             throw new UnexpectedTypeException($constraint, UniqueNameConstraint::class);
         }
-
-        $productSetAttributeTransfer = $constraint->getProductAttributeSetFacade()->findProductAttributeSetByName(
-            $value,
-        );
+        $productSetAttributeTransfer = $constraint->getProductAttributeSetFacade()->findProductAttributeSetByName($value);
 
         if (!$productSetAttributeTransfer) {
             return;
