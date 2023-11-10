@@ -49,9 +49,7 @@ class ProductAttributeSubFormDataProvider
     protected function getAttributeSetChoices(): array
     {
         $attributeSets = $this->attributeSetFacade->getProductAttributeSets();
-        $choices = [
-            'Choose an attribute set' => null,
-        ];
+        $choices = [];
 
         foreach ($attributeSets as $attributeSet) {
             $choices[$attributeSet->getName()] = $attributeSet->getIdProductAttributeSet();

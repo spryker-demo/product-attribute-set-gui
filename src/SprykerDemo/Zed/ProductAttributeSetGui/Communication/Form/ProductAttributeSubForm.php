@@ -42,8 +42,7 @@ class ProductAttributeSubForm extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver
-            ->setRequired(static::ATTRIBUTE_SET_CHOICES)
+        $resolver->setRequired(static::ATTRIBUTE_SET_CHOICES)
             ->setDefaults([
                 'required' => false,
             ]);
@@ -70,6 +69,7 @@ class ProductAttributeSubForm extends AbstractType
     {
         $builder->add(static::FIELD_SET, ChoiceType::class, [
             'label' => 'Attribute set',
+            'placeholder' => 'Choose an attribute set',
             'choices' => $choices,
             'constraints' => [
                 new NotBlank(),

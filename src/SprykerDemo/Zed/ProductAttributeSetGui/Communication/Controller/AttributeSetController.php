@@ -172,12 +172,8 @@ class AttributeSetController extends AbstractController
      */
     protected function handleProductAttributeSetForm(FormInterface $form): void
     {
-        $formData = $form->getData();
         $productAttributeSetTransfer = new ProductAttributeSetTransfer();
-
-        $productAttributeSetTransfer->setIdProductAttributeSet($formData[ProductAttributeSetTransfer::ID_PRODUCT_ATTRIBUTE_SET]);
-        $productAttributeSetTransfer->setName($formData[ProductAttributeSetTransfer::NAME]);
-        $productAttributeSetTransfer->setProductManagementAttributeIds($formData[ProductAttributeSetTransfer::PRODUCT_MANAGEMENT_ATTRIBUTE_IDS]);
+        $productAttributeSetTransfer->fromArray($form->getData(), true);
 
         $this->getFactory()->getProductAttributeSetFacade()->saveProductAttributeSet($productAttributeSetTransfer);
     }
