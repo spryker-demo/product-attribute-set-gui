@@ -87,7 +87,7 @@ class ProductAttributeSetForm extends AbstractType
     protected function addNameField(FormBuilderInterface $builder)
     {
         $builder->add(static::FIELD_NAME, TextType::class, [
-            'label' => 'Name',
+            'label' => 'product_attribute_set_gui.name',
             'constraints' => [
                 new NotBlank(),
                 $this->getFactory()->createUniqueNameConstraint(),
@@ -106,7 +106,7 @@ class ProductAttributeSetForm extends AbstractType
     protected function addProductManagementAttributeIdsField(FormBuilderInterface $builder, array $options)
     {
         $builder->add(static::FIELD_PRODUCT_MANAGEMENT_ATTRIBUTE_IDS, Select2ComboBoxType::class, [
-            'label' => 'Attributes',
+            'label' => 'product_attribute_set_gui.attributes',
             'choices' => $options[static::OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_CHOICES],
             'multiple' => true,
             'constraints' => [

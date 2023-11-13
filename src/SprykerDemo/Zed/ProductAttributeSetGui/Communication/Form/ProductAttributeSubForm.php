@@ -68,8 +68,8 @@ class ProductAttributeSubForm extends AbstractType
     protected function addAttributeSetField(FormBuilderInterface $builder, array $choices)
     {
         $builder->add(static::FIELD_SET, ChoiceType::class, [
-            'label' => 'Attribute set',
-            'placeholder' => 'Choose an attribute set',
+            'label' => 'product_attribute_set_gui.attribute_set',
+            'placeholder' => 'product_attribute_set_gui.chose_attribute_set',
             'choices' => $choices,
             'constraints' => [
                 new NotBlank(),
