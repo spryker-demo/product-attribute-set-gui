@@ -3,14 +3,14 @@
 {% block section_title 'Create Product Attribute Set' | trans %}
 
 {% block action %}
-    {{ backActionButton('/product-attribute-set-gui/attribute-set/list', 'List of Product Attribute Sets') }}
+    {{ backActionButton('/product-attribute-set-gui', 'List of Product Attribute Sets') }}
 {% endblock %}
 
 {% block content %}
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Create Product Attribute Set' } %}
         {% block widget_content %}
             {{ form_start(form) }}
-                {% include '@ProductAttributeSetGui/AttributeSet/partials/product-attribute-set-form-content.twig' %}
+                {% include '@ProductAttributeSetGui/Partials/product-attribute-set-form-content.twig' %}
                 <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}" />
             {{ form_end(form) }}
         {% endblock %}

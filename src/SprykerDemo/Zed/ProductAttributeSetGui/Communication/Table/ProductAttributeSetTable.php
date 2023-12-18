@@ -10,7 +10,6 @@ namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication\Table;
 use Orm\Zed\ProductAttributeSet\Persistence\Map\SpyProductAttributeSetTableMap;
 use Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSet;
 use Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSetQuery;
-use Spryker\Service\UtilText\Model\Url\Url;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use Spryker\Zed\Translator\Business\TranslatorFacadeInterface;
@@ -21,6 +20,11 @@ class ProductAttributeSetTable extends AbstractTable
      * @var string
      */
     public const TABLE_COL_ACTIONS = 'Actions';
+
+    /**
+     * @var string
+     */
+    protected const PARAM_ID_PRODUCT_ATTRIBUTE_SET = 'id_product_attribute_set';
 
     /**
      * @var \Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSetQuery
@@ -51,9 +55,7 @@ class ProductAttributeSetTable extends AbstractTable
      */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
-        $url = Url::generate('list-table')->build();
-
-        $config->setUrl($url);
+        $config->setUrl('table');
         $config->setHeader([
             SpyProductAttributeSetTableMap::COL_ID_PRODUCT_ATTRIBUTE_SET => 'ID',
             SpyProductAttributeSetTableMap::COL_NAME => 'Name',
@@ -120,9 +122,9 @@ class ProductAttributeSetTable extends AbstractTable
      */
     protected function createViewButton(SpyProductAttributeSet $productAttributeSetEntity): string
     {
-        $url = sprintf('view?id_product_attribute_set=%d', $productAttributeSetEntity->getIdProductAttributeSet());
+        $url = sprintf('product-attribute-set-gui/view?%s=%d', static::PARAM_ID_PRODUCT_ATTRIBUTE_SET, $productAttributeSetEntity->getIdProductAttributeSet());
 
-        return $this->generateEditButton($url, 'View');
+        return $this->generateViewButton($url, 'View');
     }
 
     /**
@@ -132,7 +134,7 @@ class ProductAttributeSetTable extends AbstractTable
      */
     protected function createEditButton(SpyProductAttributeSet $productAttributeSetEntity): string
     {
-        $url = sprintf('edit?id_product_attribute_set=%d', $productAttributeSetEntity->getIdProductAttributeSet());
+        $url = sprintf('product-attribute-set-gui/edit?%s=%d', static::PARAM_ID_PRODUCT_ATTRIBUTE_SET, $productAttributeSetEntity->getIdProductAttributeSet());
 
         return $this->generateEditButton($url, 'Edit');
     }
@@ -144,7 +146,7 @@ class ProductAttributeSetTable extends AbstractTable
      */
     protected function createDeleteButton(SpyProductAttributeSet $productAttributeSetEntity): string
     {
-        $url = sprintf('delete?id_product_attribute_set=%d', $productAttributeSetEntity->getIdProductAttributeSet());
+        $url = sprintf('product-attribute-set-gui/delete?%s=%d', static::PARAM_ID_PRODUCT_ATTRIBUTE_SET, $productAttributeSetEntity->getIdProductAttributeSet());
 
         return $this->generateRemoveButton($url, $this->translatorFacade->trans('Delete'), [
             'title' => $this->translatorFacade->trans('Deletion Warning'),

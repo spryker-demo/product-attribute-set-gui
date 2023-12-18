@@ -7,12 +7,14 @@
 
 namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form;
 
+use Generated\Shared\Transfer\ProductAttributeSetTransfer;
 use Spryker\Zed\Gui\Communication\Form\Type\Select2ComboBoxType;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -72,7 +74,7 @@ class ProductAttributeSetForm extends AbstractType
      */
     protected function addIdProductAttributeSetField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_ID_PRODUCT_ATTRIBUTE_SET, HiddenType::class, [
+        $builder->add(ProductAttributeSetTransfer::ID_PRODUCT_ATTRIBUTE_SET, HiddenType::class, [
             'required' => true,
         ]);
 
@@ -86,10 +88,11 @@ class ProductAttributeSetForm extends AbstractType
      */
     protected function addNameField(FormBuilderInterface $builder)
     {
-        $builder->add(static::FIELD_NAME, TextType::class, [
+        $builder->add(ProductAttributeSetTransfer::NAME, TextType::class, [
             'label' => 'product_attribute_set_gui.name',
             'constraints' => [
                 new NotBlank(),
+                new Length(['max' => 255]),
                 $this->getFactory()->createUniqueNameConstraint(),
             ],
         ]);
@@ -105,7 +108,7 @@ class ProductAttributeSetForm extends AbstractType
      */
     protected function addProductManagementAttributeIdsField(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(static::FIELD_PRODUCT_MANAGEMENT_ATTRIBUTE_IDS, Select2ComboBoxType::class, [
+        $builder->add(ProductAttributeSetTransfer::PRODUCT_MANAGEMENT_ATTRIBUTE_IDS, Select2ComboBoxType::class, [
             'label' => 'product_attribute_set_gui.attributes',
             'choices' => $options[static::OPTION_PRODUCT_MANAGEMENT_ATTRIBUTE_CHOICES],
             'multiple' => true,

@@ -404,7 +404,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: `/product-attribute-set?attribute-set-id=${key}`,
+            url: `/product-attribute-set-gui/index/product-attribute-set-data?attribute-set-id=${key}`,
             dataType: 'json',
             success: function (data) {
                 data.product_management_attributes.forEach(function (attribute) {

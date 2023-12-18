@@ -39,22 +39,7 @@ class ProductAttributeSubFormDataProvider
     public function getOptions(): array
     {
         return [
-            ProductAttributeSubForm::ATTRIBUTE_SET_CHOICES => $this->getAttributeSetChoices(),
+            ProductAttributeSubForm::ATTRIBUTE_SET_CHOICES => $this->attributeSetFacade->getProductAttributeSetIdsIndexedByName(),
         ];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getAttributeSetChoices(): array
-    {
-        $attributeSets = $this->attributeSetFacade->getProductAttributeSets();
-        $choices = [];
-
-        foreach ($attributeSets as $attributeSet) {
-            $choices[$attributeSet->getName()] = $attributeSet->getIdProductAttributeSet();
-        }
-
-        return $choices;
     }
 }

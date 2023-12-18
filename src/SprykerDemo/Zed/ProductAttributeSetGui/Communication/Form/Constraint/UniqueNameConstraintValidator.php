@@ -7,6 +7,7 @@
 
 namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\Constraint;
 
+use Generated\Shared\Transfer\ProductAttributeSetCriteriaTransfer;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -26,18 +27,19 @@ class UniqueNameConstraintValidator extends ConstraintValidator
         if (!$constraint instanceof UniqueNameConstraint) {
             throw new UnexpectedTypeException($constraint, UniqueNameConstraint::class);
         }
-        $productSetAttributeTransfer = $constraint->getProductAttributeSetFacade()->findProductAttributeSetByName($value);
 
-        if (!$productSetAttributeTransfer) {
+        /** @var \Generated\Shared\Transfer\ProductAttributeSetTransfer $productAttributeSetTransfer */
+        $productAttributeSetTransfer = $this->context->getRoot()->getData();
+        $productAttributeSetCriteriaTransfer = (new ProductAttributeSetCriteriaTransfer())->setName($value);
+
+        if ($productAttributeSetTransfer->getIdProductAttributeSet()) {
+            $productAttributeSetCriteriaTransfer->setExcludedProductAttributeSetId($productAttributeSetTransfer->getIdProductAttributeSet());
+        }
+
+        if (!$constraint->getProductAttributeSetFacade()->productAttributeSetExists($productAttributeSetCriteriaTransfer)) {
             return;
         }
 
-        /** @var \Generated\Shared\Transfer\ProductAttributeSetTransfer $formDataProductAttributeSetTransfer */
-        $formDataProductAttributeSetTransfer = $this->context->getRoot()->getData();
-
-        if ($formDataProductAttributeSetTransfer['idProductAttributeSet'] !== null && $productSetAttributeTransfer->getIdProductAttributeSet() === (int)($formDataProductAttributeSetTransfer['idProductAttributeSet'])) {
-            return;
-        }
         $this->context->buildViolation($constraint->getMessage())
                 ->setParameter('{{ name }}', $value)
                 ->addViolation();

@@ -1,7 +1,43 @@
-<attributesets>
-    <label>Attribute Sets</label>
-    <title>Attribute Sets</title>
-    <bundle>product-attribute-set-gui</bundle>
-    <controller>attribute-set</controller>
-    <action>list</action>
-</attributesets>
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <attribute-sets>
+        <pages>
+            <attribute-sets>
+                <label>Attribute Sets</label>
+                <title>Attribute Sets</title>
+                <bundle>product-attribute-set-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <pages>
+                    <attribute-set-create>
+                        <label>Create Attribute Set</label>
+                        <title>Create Attribute Set</title>
+                        <bundle>product-attribute-set-gui</bundle>
+                        <controller>create</controller>
+                        <action>index</action>
+                        <visible>0</visible>
+                    </attribute-set-create>
+
+                    <attribute-set-edit>
+                        <label>Edit Attribute Set</label>
+                        <title>Edit Attribute Set</title>
+                        <bundle>product-attribute-set-gui</bundle>
+                        <controller>edit</controller>
+                        <action>index</action>
+                        <visible>0</visible>
+                    </attribute-set-edit>
+
+                    <attribute-set-view>
+                        <label>View Attribute Set</label>
+                        <title>View Attribute Set</title>
+                        <bundle>product-attribute-set-gui</bundle>
+                        <controller>view</controller>
+                        <action>index</action>
+                        <visible>0</visible>
+                    </attribute-set-view>
+                </pages>
+            </attribute-sets>
+        </pages>
+    </attribute-sets>
+</config>
+

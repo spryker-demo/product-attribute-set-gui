@@ -7,7 +7,6 @@
 
 namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider;
 
-use Generated\Shared\Transfer\ProductAttributeSetTransfer;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 use Spryker\Zed\ProductAttribute\Business\ProductAttributeFacadeInterface;
 use SprykerDemo\Zed\ProductAttributeSet\Business\ProductAttributeSetFacadeInterface;
@@ -46,29 +45,6 @@ class ProductAttributeSetFormDataProvider
     }
 
     /**
-     * @param int|null $idProductAttributeSet
-     *
-     * @return array <string, mixed>
-     */
-    public function getData(?int $idProductAttributeSet = null): array
-    {
-        if ($idProductAttributeSet === null) {
-            return [];
-        }
-        $data = [
-            ProductAttributeSetForm::FIELD_ID_PRODUCT_ATTRIBUTE_SET => $idProductAttributeSet,
-        ];
-        $productAttributeSetTransfer = $this->getProductAttributeSetTransfer($idProductAttributeSet);
-
-        $data += [
-            ProductAttributeSetForm::FIELD_NAME => $productAttributeSetTransfer->getName(),
-            ProductAttributeSetForm::FIELD_PRODUCT_MANAGEMENT_ATTRIBUTE_IDS => $productAttributeSetTransfer->getProductManagementAttributeIds(),
-        ];
-
-        return $data;
-    }
-
-    /**
      * @return array<string, mixed>
      */
     public function getOptions(): array
@@ -81,16 +57,6 @@ class ProductAttributeSetFormDataProvider
     }
 
     /**
-     * @param int $idProductAttributeSet
-     *
-     * @return \Generated\Shared\Transfer\ProductAttributeSetTransfer
-     */
-    protected function getProductAttributeSetTransfer(int $idProductAttributeSet): ProductAttributeSetTransfer
-    {
-        return $this->productAttributeSetFacade->findProductAttributeSetById($idProductAttributeSet) ?? new ProductAttributeSetTransfer();
-    }
-
-    /**
      * @return array<mixed, mixed>
      */
     protected function getProductManagementAttributeChoices(): array
@@ -100,11 +66,13 @@ class ProductAttributeSetFormDataProvider
         $productAttributes = $this->productAttributeFacade->getProductAttributeCollection();
         foreach ($productAttributes as $productAttribute) {
             foreach ($productAttribute->getLocalizedKeys() as $localizedKey) {
-                if ($localizedKey->getLocaleName() === $currentLocale->getLocaleName()) {
-                    $choices[$localizedKey->getKeyTranslation()] = $productAttribute->getIdProductManagementAttribute();
-
-                    break;
+                if ($localizedKey->getLocaleName() !== $currentLocale->getLocaleName()) {
+                    continue;
                 }
+
+                $choices[$localizedKey->getKeyTranslation()] = $productAttribute->getIdProductManagementAttribute();
+
+                break;
             }
         }
 

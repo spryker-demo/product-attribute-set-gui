@@ -7,12 +7,15 @@
 
 namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication;
 
+use Generated\Shared\Transfer\ProductAttributeSetTransfer;
 use Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSetQuery;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 use Spryker\Zed\ProductAttribute\Business\ProductAttributeFacadeInterface;
 use Spryker\Zed\Translator\Business\TranslatorFacadeInterface;
 use SprykerDemo\Zed\ProductAttributeSet\Business\ProductAttributeSetFacadeInterface;
+use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Extractor\LocalizedAttributeNamesExtractor;
+use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Extractor\LocalizedAttributeNamesExtractorInterface;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\Constraint\UniqueNameConstraint;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider\ProductAttributeSetFormDataProvider;
 use SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider\ProductAttributeSubFormDataProvider;
@@ -56,12 +59,12 @@ class ProductAttributeSetGuiCommunicationFactory extends AbstractCommunicationFa
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param \Generated\Shared\Transfer\ProductAttributeSetTransfer $data
      * @param array<string, mixed> $options
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function getProductAttributeSetForm(array $data = [], array $options = []): FormInterface
+    public function getProductAttributeSetForm(ProductAttributeSetTransfer $data, array $options = []): FormInterface
     {
         return $this->getFormFactory()->create(ProductAttributeSetForm::class, $data, $options);
     }
@@ -95,6 +98,14 @@ class ProductAttributeSetGuiCommunicationFactory extends AbstractCommunicationFa
         return new UniqueNameConstraint(
             [UniqueNameConstraint::OPTION_PRODUCT_ATTRIBUTE_SET_FACADE => $this->getProductAttributeSetFacade()],
         );
+    }
+
+    /**
+     * @return \SprykerDemo\Zed\ProductAttributeSetGui\Communication\Extractor\LocalizedAttributeNamesExtractorInterface
+     */
+    public function createLocalizedAttributeNamesExtractor(): LocalizedAttributeNamesExtractorInterface
+    {
+        return new LocalizedAttributeNamesExtractor();
     }
 
     /**
