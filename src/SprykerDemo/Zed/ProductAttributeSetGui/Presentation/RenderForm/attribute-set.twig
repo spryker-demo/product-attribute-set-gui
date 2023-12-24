@@ -5,7 +5,7 @@
             <tr>
                 <td class="attribute-set-table__cell attribute-set-table__cell--expand">
                     {{ form_errors(form) }}
-                    {{ form_row(form) }}
+                    {{ form_row(form.set) }}
                 </td>
                 <td class="attribute-set-table__cell">
                     <input type="button" onclick="return false" class="btn btn-primary" value="{{ 'Add' | trans }}"  id="add-attribute-set" />
