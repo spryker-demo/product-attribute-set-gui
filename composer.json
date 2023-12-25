@@ -11,8 +11,7 @@
         "spryker/locale": "^3.8.1",
         "spryker/product-attribute": "^1.10.0",
         "spryker/symfony": "^3.11.1",
-        "spryker/translator": "^1.9.1",
-        "spryker/util-text": "^1.5.1"
+        "spryker/translator": "^1.9.1"
     },
     "require-dev": {
         "spryker/code-sniffer": "*"
