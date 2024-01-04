@@ -119,4 +119,12 @@ class ProductAttributeSetForm extends AbstractType
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getBlockPrefix(): string
+    {
+        return 'attribute_set_form';
+    }
 }

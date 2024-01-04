@@ -27,6 +27,21 @@ class ProductAttributeSetTable extends AbstractTable
     protected const PARAM_ID_PRODUCT_ATTRIBUTE_SET = 'id_product_attribute_set';
 
     /**
+     * @var string
+     */
+    protected const TEXT_DELETE_BUTTON = 'product_attribute_set_gui.delete';
+
+    /**
+     * @var string
+     */
+    protected const TEXT_VIEW_BUTTON = 'product_attribute_set_gui.view';
+
+    /**
+     * @var string
+     */
+    protected const TEXT_EDIT_BUTTON = 'product_attribute_set_gui.edit';
+
+    /**
      * @var \Orm\Zed\ProductAttributeSet\Persistence\SpyProductAttributeSetQuery
      */
     protected SpyProductAttributeSetQuery $productAttributeSetQuery;
@@ -124,7 +139,7 @@ class ProductAttributeSetTable extends AbstractTable
     {
         $url = sprintf('product-attribute-set-gui/view?%s=%d', static::PARAM_ID_PRODUCT_ATTRIBUTE_SET, $productAttributeSetEntity->getIdProductAttributeSet());
 
-        return $this->generateViewButton($url, 'View');
+        return $this->generateViewButton($url, $this->translatorFacade->trans(static::TEXT_VIEW_BUTTON));
     }
 
     /**
@@ -136,7 +151,7 @@ class ProductAttributeSetTable extends AbstractTable
     {
         $url = sprintf('product-attribute-set-gui/edit?%s=%d', static::PARAM_ID_PRODUCT_ATTRIBUTE_SET, $productAttributeSetEntity->getIdProductAttributeSet());
 
-        return $this->generateEditButton($url, 'Edit');
+        return $this->generateEditButton($url, $this->translatorFacade->trans(static::TEXT_EDIT_BUTTON));
     }
 
     /**
@@ -151,7 +166,7 @@ class ProductAttributeSetTable extends AbstractTable
         return $this->generateRemoveButton($url, $this->translatorFacade->trans('Delete'), [
             'title' => $this->translatorFacade->trans('Deletion Warning'),
             'text' => $this->translatorFacade->trans('Deleting Will Permanently Remove the Item'),
-            'confirm-button-text' => $this->translatorFacade->trans('Delete'),
+            'confirm-button-text' => $this->translatorFacade->trans(static::TEXT_DELETE_BUTTON),
             AbstractTable::DELETE_FORM_NAME_SUFFIX => '_modal_confirm',
         ]);
     }

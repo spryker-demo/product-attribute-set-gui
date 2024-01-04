@@ -19,8 +19,8 @@
                     </attribute-set-create>
 
                     <attribute-set-edit>
-                        <label>Edit Attribute Set</label>
-                        <title>Edit Attribute Set</title>
+                        <label>product_attribute_set_gui.edit_product_attribute_set</label>
+                        <title>product_attribute_set_gui.edit_product_attribute_set</title>
                         <bundle>product-attribute-set-gui</bundle>
                         <controller>edit</controller>
                         <action>index</action>

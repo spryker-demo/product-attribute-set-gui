@@ -1,4 +1,4 @@
-{% embed '@Gui/Partials/widget.twig' with { widget_title: 'Add Attribute set' } %}
+{% embed '@Gui/Partials/widget.twig' with { widget_title: 'product_attribute_set_gui.add_attribute_set' } %}
     {% block widget_content %}
         {{ form_start(form, { 'attr': {'class': 'kv_autocomplete_form form-group--full-width-controls', 'id': 'attribute_set_form'} }) }}
         <table width="100%" class="attribute-set-table">
@@ -8,7 +8,7 @@
                     {{ form_row(form.set) }}
                 </td>
                 <td class="attribute-set-table__cell">
-                    <input type="button" onclick="return false" class="btn btn-primary" value="{{ 'Add' | trans }}"  id="add-attribute-set" />
+                    <input type="button" onclick="return false" class="btn btn-primary" value="{{ 'product_attribute_set_gui.add' | trans }}"  id="add-attribute-set" />
                 </td>
             </tr>
         </table>

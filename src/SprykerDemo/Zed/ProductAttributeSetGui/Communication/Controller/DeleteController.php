@@ -23,6 +23,11 @@ class DeleteController extends AbstractController
     protected const PARAM_ID_PRODUCT_ATTRIBUTE_SET = 'id_product_attribute_set';
 
     /**
+     * @var string
+     */
+    protected const MESSAGE_PRODUCT_ATTRIBUTE_SET_DELETED_SUCCESSFULLY = 'product_attribute_set_gui.product_attribute_set_successfully_deleted';
+
+    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -36,7 +41,7 @@ class DeleteController extends AbstractController
 
         $this->getFactory()->getProductAttributeSetFacade()->deleteProductAttributeSet($productAttributeSetTransfer);
 
-        $this->addSuccessMessage('Product attribute set successfully deleted');
+        $this->addSuccessMessage(static::MESSAGE_PRODUCT_ATTRIBUTE_SET_DELETED_SUCCESSFULLY);
 
         return $this->redirectResponseExternal(IndexController::PRODUCT_ATTRIBUTE_SET_LIST_URL);
     }

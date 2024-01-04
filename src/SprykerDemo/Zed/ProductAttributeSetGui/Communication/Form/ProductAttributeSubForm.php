@@ -69,7 +69,7 @@ class ProductAttributeSubForm extends AbstractType
     {
         $builder->add(static::FIELD_SET, ChoiceType::class, [
             'label' => 'product_attribute_set_gui.attribute_set',
-            'placeholder' => 'product_attribute_set_gui.chose_attribute_set',
+            'placeholder' => 'product_attribute_set_gui.choose_attribute_set',
             'choices' => $choices,
             'constraints' => [
                 new NotBlank(),

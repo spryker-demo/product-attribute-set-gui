@@ -1,13 +1,13 @@
 {% extends '@Gui/Layout/layout.twig' %}
 
-{% block section_title 'Create Product Attribute Set' | trans %}
+{% block section_title 'product_attribute_set_gui.create_product_attribute_set' | trans %}
 
 {% block action %}
-    {{ backActionButton('/product-attribute-set-gui', 'List of Product Attribute Sets') }}
+    {{ backActionButton('/product-attribute-set-gui', 'product_attribute_set_gui.product_attribute_set_list' | trans) }}
 {% endblock %}
 
 {% block content %}
-    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Create Product Attribute Set' } %}
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'product_attribute_set_gui.create_product_attribute_set' } %}
         {% block widget_content %}
             {{ form_start(form) }}
                 {% include '@ProductAttributeSetGui/Partials/product-attribute-set-form-content.twig' %}

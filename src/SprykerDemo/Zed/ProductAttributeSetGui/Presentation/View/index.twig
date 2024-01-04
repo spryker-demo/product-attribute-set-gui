@@ -3,11 +3,11 @@
 {% block section_title 'Product Attribute Set Overview' | trans %}
 
 {% block action %}
-    {{ backActionButton('/product-attribute-set-gui', 'List of Product Attribute Sets') }}
+    {{ backActionButton('/product-attribute-set-gui', 'product_attribute_set_gui.product_attribute_set_list' | trans ) }}
 {% endblock %}
 
 {% block content %}
-    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'Attribute Set #' ~ productAttributeSet.idProductAttributeSet } %}
+    {% embed '@Gui/Partials/widget.twig' with { widget_title: 'attribute-sets #' ~ productAttributeSet.idProductAttributeSet | trans } %}
 
         {% block widget_content %}
 
@@ -17,11 +17,11 @@
                     <tbody>
                         <tr>
                             <th class="col-lg-2">
-                                {{ 'Name' | trans }}</th>
+                                {{ 'product_attribute_set_gui.name' | trans }}</th>
                             <td>{{ productAttributeSet.name }}</td>
                         </tr>
                         <tr>
-                            <th>{{ 'Attributes' | trans }}</th>
+                            <th>{{ 'product_attribute_set_gui.attributes' | trans }}</th>
                             <td>{{ productManagementAttributesNames | join(', ') }}</td>
                         </tr>
                     </tbody>
