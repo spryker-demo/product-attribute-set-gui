@@ -74,6 +74,9 @@ class ProductAttributeSubForm extends AbstractType
             'constraints' => [
                 new NotBlank(),
             ],
+            'attr' => [
+                'class' => 'spryker-form-select2combobox',
+            ],
         ]);
 
         return $this;
