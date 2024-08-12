@@ -7,7 +7,7 @@
 
 namespace SprykerDemo\Zed\ProductAttributeSetGui\Communication\Form\DataProvider;
 
-use Generated\Shared\Transfer\ProductManagementAttributeFilterTransfer;
+use Generated\Shared\Transfer\ProductManagementAttributeCriteriaTransfer;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 use Spryker\Zed\ProductAttribute\Business\ProductAttributeFacadeInterface;
 use SprykerDemo\Zed\ProductAttributeSet\Business\ProductAttributeSetFacadeInterface;
@@ -64,10 +64,11 @@ class ProductAttributeSetFormDataProvider
     {
         $choices = [];
         $currentLocale = $this->localeFacade->getCurrentLocale();
-        $productAttributes = $this->productAttributeFacade->getProductManagementAttributes(
-            new ProductManagementAttributeFilterTransfer(),
-        )->getProductManagementAttributes();
-        foreach ($productAttributes as $productAttribute) {
+        $productAttributeCollectionTransfer = $this->productAttributeFacade->getProductManagementAttributeCollection(
+            new ProductManagementAttributeCriteriaTransfer(),
+        );
+
+        foreach ($productAttributeCollectionTransfer->getProductManagementAttributes() as $productAttribute) {
             foreach ($productAttribute->getLocalizedKeys() as $localizedKey) {
                 if ($localizedKey->getLocaleName() !== $currentLocale->getLocaleName()) {
                     continue;
